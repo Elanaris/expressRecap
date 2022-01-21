@@ -1,0 +1,32 @@
+<%- include("partials/header"); -%>
+
+  <div class="box" id="heading">
+    <h1><%= listTitle %></h1>
+  </div>
+
+  <div class="box">
+
+    <% for (let item of items) { %>
+      <form action="/delete" method="post">
+        <div class="item">
+          <input type="checkbox" onChange="this.form.submit()" name="deleteItem" value="<%= item._id %>">
+          <p><%= item.name %></p>
+        </div>
+        <input type="hidden" name="list" value="<%= listTitle %>" />
+      </form>
+    <% } %>
+
+    <form class="item" method="post">
+      <input type="text" name="addItem" placeholder="New Item" autocomplete="off">
+      <button class="btn btn-outline-dark" type="submit" name="list" value="<%= listTitle %>">+</button>
+    </form>
+
+  </div>
+
+  <div class="text-center pb-4">
+    <form action="/delete-list" method="post">
+      <button class="btn btn-outline-dark" type="submit" name="list" value="<%= listTitle %>">Delete List</button>
+    </form>
+  </div>
+
+<%- include("partials/footer"); -%>
